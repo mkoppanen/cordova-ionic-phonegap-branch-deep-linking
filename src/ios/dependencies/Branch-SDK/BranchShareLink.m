@@ -206,6 +206,12 @@ typedef NS_ENUM(NSInteger, BranchShareActivityItemType) {
             shareViewController.popoverPresentationController.barButtonItem = anchor;
         }
     }
+
+    NSArray * excludeActivities = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BranchShareSheetExcludedActivities"];
+    if (excludeActivities!=nil && [excludeActivities count] > 0) {
+        shareViewController.excludedActivityTypes = excludeActivities;
+    }
+
     [presentingViewController presentViewController:shareViewController animated:YES completion:nil];
 }
 
