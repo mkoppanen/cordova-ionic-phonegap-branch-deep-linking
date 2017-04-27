@@ -255,6 +255,11 @@
     }
     UIActivityViewController *shareViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
     
+    NSArray * excludeActivities = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BranchShareSheetExcludedActivities"];
+    if (excludeActivities!=nil && [excludeActivities count] > 0) {
+        shareViewController.excludedActivityTypes = excludeActivities;
+    }
+
     if ([shareViewController respondsToSelector:@selector(completionWithItemsHandler)]) {
         shareViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
             // Log share completed event
